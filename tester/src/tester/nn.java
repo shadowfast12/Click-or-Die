@@ -19,9 +19,12 @@ public class nn extends Canvas{
 	public long wnum;
 	//RED VALUE OF RBG
 	public int colocho;
+	//AMOUNT OF XEROXS
+	public long Xero;
 	
 	public nn() {
 		//DEFAULT CONSTRUCTOR
+		Xero = 0;
 		colocho = 0;
 		wnum = 0;
 		amnt = 0;
@@ -44,19 +47,21 @@ public class nn extends Canvas{
 		//TEXT OF THE AMOUNT OF MONEY
 		JLabel lb1 = new JLabel("MONEY: "+amnt);
 		lb1.setBounds(30,50,1000,40);
-		lb1.setFont(new Font("Haettenschweiler", Font.PLAIN, 20));
+		lb1.setFont(new Font("Haettenschweiler", Font.PLAIN, 15));
 		f.add(lb1);	
 		
 		//TEXT OF THE AMOUNT OF UPGRADE
 		JLabel lb2 = new JLabel("UPGRADE: "+String.valueOf(upg));
-		lb2.setBounds(30,80,300,40);
-		lb2.setFont(new Font("Haettenschweiler", Font.PLAIN, 20));
+		lb2.setBounds(30,75,300,40);
+		lb2.setFont(new Font("Haettenschweiler", Font.PLAIN, 15));
 		f.add(lb2);
 		
 		//BUTTON TO CLICK FOR MONEY
 		JButton b = new JButton("CLICK");
-		b.setBounds(65,150,175,75);
+		b.setBounds(5,115,275,130);
 		b.setFont(new Font("Rockwell Extra Bold", Font.PLAIN, 35));
+		b.setBackground(Color.BLACK);
+		b.setOpaque(false);
 		f.add(b);
 		
 		//BUTTON TO UPGRADE
@@ -66,13 +71,18 @@ public class nn extends Canvas{
 		
 		//BUTTON TO THE SHOP
 		JButton bshop = new JButton("SHOP");
-		bshop.setBounds(80,280,120,30);
+		bshop.setBounds(80,282,120,30);
 		f.add(bshop);
 		
 		//TEXT OF THE AMOUNT OF WORKERS
-		JLabel lb3 = new JLabel("Number of Workers: "+wnum);
-		lb3.setBounds(30,300,300,40);
+		JLabel lb3 = new JLabel("NUMBER OF WORKERS: "+wnum);
+		lb3.setBounds(10,300,300,40);
 		f.add(lb3);	
+		
+		//TEXT OF THE AMOUNT OF XEROX
+		JLabel amtXero = new JLabel("NUMBER OF XEROX: "+Xero);
+		amtXero.setBounds(10,315,300,40);
+		f.add(amtXero);
 	
 		//OTHER CUSTOMIZE STUFF
 		f.setSize(300,400);
@@ -87,17 +97,62 @@ public class nn extends Canvas{
 		s.setLayout(null);
 		s.getContentPane().setBackground(new Color(90, colocho, 60));
 		
+		//SHOP LABEL TITLE
+		JLabel shopl = new JLabel("Le Shop");
+		shopl.setFont(new Font("Bauhaus 93", Font.PLAIN, 35));
+		shopl.setBounds(80, -18, 250, 100);
+		s.add(shopl);
 		
 		//BUY WORKER
-		JButton bw= new JButton("BUY WORKER");
-		bw.setFont(new Font("Haettenschweiler", Font.PLAIN, 20));
-		bw.setBounds(50,80,120,40);
+		JButton bw= new JButton("PURCHASE");
+		bw.setFont(new Font("Haettenschweiler", Font.PLAIN, 12));
+		bw.setBounds(10,80,120,40);
 		s.add(bw);
 		//WORKER COST LABEL
 		JLabel bl = new JLabel("WORKERS COST: $"+ 50*(wnum+1));
-		bl.setBounds(50,50,300,40);
+		bl.setBounds(10,50,300,40);
 		s.setSize(300,400);
 		s.add(bl);
+		
+		//BUY Xerox Alto
+		JButton bw2 = new JButton("PURCHASE");
+		bw2.setFont(new Font("Haettenschweiler", Font.PLAIN,12));
+		bw2.setBounds(10,160,120,40);
+		s.add(bw2);
+		//XERO COST LABEL
+		JLabel Xerol = new JLabel("XEROX COST: $"+ 125*(Xero+1));
+		Xerol.setBounds(10,120,300,40);
+		s.add(Xerol);
+		
+		
+		
+		
+		//ACTION TO BUY XEROX
+		bw2.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				if(amnt>=125*(Xero+1)) {
+					//THREAD FOR XEROX
+					amnt-=125*(Xero+1);
+					Xerol.setText("XEROX COST: $"+125*(Xero+1));
+					class xeroth extends Thread{
+						public void run() {
+							while(true) {
+								try {
+									xeroth.sleep(500);
+								} catch (InterruptedException e) {
+									e.printStackTrace();
+								}
+								amnt ++;
+								lb1.setText(String.valueOf("MONEY: "+amnt));
+							}
+						}
+					}
+					xeroth xer = new xeroth();
+					xer.start();
+					
+				}
+			}
+		});
 		
 		//THREAD FOR BACKGROUND COLOR CHANGER OF THE GUI
 		class colors extends Thread{
@@ -134,7 +189,7 @@ public class nn extends Canvas{
 				if(amnt>=50*(wnum+1)) {
 					wnum++;
 					amnt-=50*wnum;
-					JLabel bl = new JLabel("WORKERS COST: $"+ 50*(wnum+1));
+					bl.setText(String.valueOf("WORKERS COST: $"+ 50*(wnum+1)));
 					lb3.setText(String.valueOf("Number of Workers: "+wnum));
 					//THREAD FOR THE WORKERS GETTING CLICKS
 					class mut extends Thread {
@@ -157,6 +212,7 @@ public class nn extends Canvas{
 					mm.start();
 				}
 			}
+
 		});
 		
 		//ACTION OF CLICK
