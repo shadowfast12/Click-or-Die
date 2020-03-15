@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 public class nn extends Canvas{
 	//SET VARIABLES TO DATA TYPE
 	
+	
 	//TOTAL AMOUNT OF CLICKS
 	public long amnt;
 	//AMOUNT OF UPGRADES
