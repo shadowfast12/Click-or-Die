@@ -133,7 +133,9 @@ public class nn extends Canvas{
 				if(amnt>=125*(Xero+1)) {
 					//THREAD FOR XEROX
 					amnt-=125*(Xero+1);
+					Xero++;
 					Xerol.setText("XEROX COST: $"+125*(Xero+1));
+					amtXero.setText("NUMBER OF XEROX: "+Xero);
 					class xeroth extends Thread{
 						public void run() {
 							while(true) {
@@ -236,8 +238,8 @@ public class nn extends Canvas{
 		//ACTION OF PURCHASING UPGRADE
 		bb.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
-				if(num+num*5<=amnt) {
-					amnt-=Math.floor(num+num*1.2);
+				if(Math.pow(4,num)<=amnt) {
+					amnt-=Math.round(Math.pow(4,num));
 					num++;
 					upg++;
 					lb2.setText(String.valueOf("LEVEL: "+upg));
