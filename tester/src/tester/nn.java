@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 public class nn extends Canvas{
 	//SET VARIABLES TO DATA TYPE
 	
+	//VALUE TO DETERMINE THE IMAGE STATE
+	public byte im;
 	
 	//TOTAL AMOUNT OF CLICKS
 	public long amnt;
@@ -26,8 +28,10 @@ public class nn extends Canvas{
 	//VALUE OF THE MONEY MADE FROM THE THREADS PER SEC
 	public double psec;
 	
+	
 	public nn() {
 		//DEFAULT CONSTRUCTOR
+		im=0;
 		Xero = 0;
 		psec = 0.00d;
 		colocho = 0;
@@ -36,7 +40,7 @@ public class nn extends Canvas{
 		upg=1;
 		num=1;
 	}
-	
+
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -46,6 +50,7 @@ public class nn extends Canvas{
 
 		JFrame f;
 		f=new JFrame("CLICK OR DIE BY ZACH BAUMAN");
+		f.setIconImage(Toolkit.getDefaultToolkit().getImage(nn.class.getResource("/tester/ee/5a2411fc6003f508dd5d5b37.png")));
 
 		//TITLE OF MAIN FRAME
 		JLabel title = new JLabel("CLICK OR DIE");
@@ -106,12 +111,34 @@ public class nn extends Canvas{
 		amtXero.setBounds(10,315,300,40);
 		f.getContentPane().add(amtXero);
 	
+		
 		//OTHER CUSTOMIZE STUFF
-		f.setSize(300,400);
+		f.setSize(300,700);
 		f.getContentPane().setBackground(new Color(colocho, 180, 90));
 		f.getContentPane().setLayout(null);
 		f.setVisible(true);
-		f.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		//mining image
+		JLabel JLamining = new JLabel("");
+		JLamining.setIcon(new ImageIcon(nn.class.getResource("/tester/ee/first366-3667965_transparent-mining-icon-hd-png-download.png")));
+		JLamining.setBounds(45, 368, 260, 209);
+		f.getContentPane().add(JLamining);
+		
+		//second mining image
+		JLabel JLamining2 = new JLabel("");
+		JLamining2.setIcon(new ImageIcon(nn.class.getResource("/tester/ee/366-3667965_transparent-mining-icon-hd-png-download.png")));
+		JLamining2.setBounds(45, 368, 260, 209);
+		JLamining2.setVisible(false);
+		f.getContentPane().add(JLamining2);
+		
+		//ZACH BAUMAN CREDITS
+		JLabel lblNewLabel = new JLabel("Made by Zach Bauman");
+		lblNewLabel.setBounds(150, 637, 130, 16);
+		f.getContentPane().add(lblNewLabel);
+		
+
+		
 		
 		//SHOP FRAME OF GUI
 		JFrame s;
@@ -255,8 +282,19 @@ public class nn extends Canvas{
 			public void actionPerformed(ActionEvent e) {
 				amnt+=upg;
 				lb1.setText(String.valueOf("MONEY: "+amnt));
-		
-	}
+				
+				//animates the images
+				if(im==0) {
+					JLamining2.setVisible(true);
+					JLamining.setVisible(false);
+					im++;
+				}
+				else{
+					JLamining2.setVisible(false);
+					JLamining.setVisible(true);
+					im--;
+				}
+			}
 	
 	});
 		
@@ -289,5 +327,4 @@ public class nn extends Canvas{
 		nn n = new nn();  
 		n.no();		
 	}	
-
 	}
