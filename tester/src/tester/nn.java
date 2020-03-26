@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
+import sun.audio.*;
 
 
 @SuppressWarnings("serial")
@@ -133,9 +135,9 @@ public class nn extends Canvas{
 		f.getContentPane().add(JLamining2);
 		
 		//ZACH BAUMAN CREDITS
-		JLabel lblNewLabel = new JLabel("Made by Zach Bauman");
-		lblNewLabel.setBounds(150, 637, 130, 16);
-		f.getContentPane().add(lblNewLabel);
+		JLabel creditss = new JLabel("Made by Zach Bauman");
+		creditss.setBounds(150, 637, 130, 16);
+		f.getContentPane().add(creditss);
 		
 
 		
@@ -148,13 +150,13 @@ public class nn extends Canvas{
 		
 		//SHOP LABEL TITLE
 		JLabel shopl = new JLabel("Le Shop");
-		shopl.setFont(new Font("Bauhaus 93", Font.PLAIN, 35));
+		shopl.setFont(new Font("Andalus", Font.PLAIN, 35));
 		shopl.setBounds(80, -18, 250, 100);
 		s.getContentPane().add(shopl);
 		
 		//BUY WORKER
 		JButton bw= new JButton("PURCHASE");
-		bw.setFont(new Font("Haettenschweiler", Font.PLAIN, 18));
+		bw.setFont(new Font("Franklin Gothic Medium", Font.PLAIN, 16));
 		bw.setBackground(Color.black);
 		bw.setOpaque(false);
 		bw.setBounds(10,80,120,40);
@@ -167,7 +169,7 @@ public class nn extends Canvas{
 		
 		//BUY Xerox Alto
 		JButton bw2 = new JButton("PURCHASE");
-		bw2.setFont(new Font("Haettenschweiler", Font.PLAIN,18));
+		bw2.setFont(new Font("Franklin Gothic Medium", Font.PLAIN,16));
 		bw2.setBackground(Color.black);
 		bw2.setOpaque(false);
 		bw2.setBounds(10,160,120,40);
@@ -279,7 +281,7 @@ public class nn extends Canvas{
 		//ACTION OF CLICK
 		b.addActionListener(new ActionListener() {
 
-			public void actionPerformed(ActionEvent e) {
+			public void actionPerformed(ActionEvent e){
 				amnt+=upg;
 				lb1.setText(String.valueOf("MONEY: "+amnt));
 				
